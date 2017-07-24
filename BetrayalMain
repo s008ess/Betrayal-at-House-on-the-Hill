@@ -1,0 +1,493 @@
+#include <Wire.h>
+#include <LCD.h>
+#include <LiquidCrystal_I2C.h>
+#include <Menu.h>
+
+#define I2C_ADDR 0x27
+#define BACKLIGHT_PIN 3
+#define En_pin 2
+#define Rw_pin 1
+#define Rs_pin 0
+#define D4_pin 4
+#define D5_pin 5
+#define D6_pin 6
+#define D7_pin 7
+
+LiquidCrystal_I2C lcd(I2C_ADDR,En_pin,Rw_pin,Rs_pin,D4_pin,D5_pin,D6_pin,D7_pin,BACKLIGHT_PIN,POSITIVE);
+LCD *myLCD = &lcd;
+
+const int myPot = A1;     // potentiometer (Pot) is connected to analogue pin 1
+const int myButton = A2;  // Button is connected to analogue pin 2
+
+int speedarray[] = {1,2,2,3,3,3,4,5};
+   
+void setup()
+{
+//Button logic
+pinMode(myPot, INPUT);    // sets the analogue pin A1 as input
+pinMode(myButton, INPUT); // sets the analogue pin A2 as input
+        
+//LCD logic        
+  lcd.begin(20,4);              // initialize the lcd (cols, rows)
+  lcd.clear ();                 // Clear the Screen
+  lcd.setCursor(0, 0);               // set cursor to location
+  lcd.print("Betrayal at")      // write to LCD
+  lcd.setCursor(3, 1);               // set cursor to location
+  lcd.print("House on the Hill")// write to LCD
+  delay (11);                         // delay to allow writing to lcd
+  lcd.setCursor(1, 3);               // set cursor to location
+  lcd.print("Geek Edition v.02")// write to LCD
+  delay (10000);                    // delay for 10 seconds
+  lcd.clear ();                 // Clear the Screen
+  lcd.setCursor(0, 0);               // set cursor to location  
+  lcd.print("");                    // write to LCD
+  delay (11);                         // delay to allow writing to lcd
+  lcd.setCursor(0, 1);               // set cursor to location
+  delay (11);                         // delay to allow writing to lcd
+  lcd.print("");                    // write to LCD
+  delay (11);                         // delay to allow writing to lcd
+  lcd.setCursor(0, 2);               // set cursor to location
+  delay (11);                         // delay to allow writing to lcd
+  lcd.print("");                    // write to LCD
+  delay (11);                         // delay to allow writing to lcd
+  lcd.setCursor(0, 3);               // set cursor to location
+  delay (11);                         // delay to allow writing to lcd
+  lcd.print("");                    // write to LCD
+  delay (11);                         // delay to allow writing to lcd
+  lcd.home ();                  // clear screen
+  delay(1000);                         // delay to allow writing to lcd
+}
+
+void loop()
+{
+  int sensorValue = analogRead(myPot);
+  // set cursor to second row, first column
+  lcd.setCursor(0, 1);
+  lcd.print(sensorValue);
+  lcd.print("      ");
+  delay (100);
+  /*
+  int sensorValue = analogRead(myButton);
+  // set cursor to third row, first column
+  lcd.setCursor(0, 2);
+  lcd.print(sensorValue);
+  lcd.print("      ");
+  delay (100);
+  */
+}
+
+int screenSelect=0;
+void main()
+{
+if (button_pressed) change menuScreen;
+
+if (screenSelect==0) screen0()
+if (screenSelect==1) screen1()
+if (screenSelect==2) screen2()
+if (screenSelect==3) screen3()
+if (screenSelect==4) screen4()
+if (screenSelect==5) screen5()
+if (screenSelect==6) screen6()
+if (screenSelect==7) screen7()
+if (screenSelect==8) screen8()
+if (screenSelect==9) screen9()
+if (screenSelect==10) screen10()
+if (screenSelect==11) screen11()
+}
+
+//Heather Granville
+screen0(){
+//display screen 0 stuff here
+  lcd.clear (); // Clear the Screen
+  lcd.setCursor(0, 0); // Set the Cursor
+  lcd.print("Heather Granville"); // Write Name
+  lcd.setCursor(0, 1); // Set the Cursor
+  lcd.print("DOB: 2-AUG"); // Write DOB
+  lcd.setCursor(0, 2); // Set the Cursor
+  lcd.print("Spd:"); // Write Spd:
+     for(int speed = 0; speed < 8; speed++){ // logic to increment speed value
+          lcd.print(speedarray[speed]); // prints speed from speedarray
+}
+  lcd.setCursor(11, 2); // Set the Cursor
+  lcd.print("Mgt:"); // Write Mgt:
+  lcd.setCursor(17, 2); // Set the Cursor
+     for(int might= 0; might <= 100; might++){ // logic to increment might value
+          lcd.print(might); // prints might 0 to 99  
+}
+  lcd.setCursor(0, 3); // Set the Cursor
+  lcd.print("San:"); // Write San:
+  lcd.setCursor(6, 3); // Set the Cursor
+     for(int sanity= 0; sanity <= 100; sanity++){ // logic to increment sanity value
+          lcd.print(sanity); // prints sanity 0 to 99   
+}
+  lcd.setCursor(11, 3); // Set the Cursor
+  lcd.print("Kno:"); // Write Kno:
+  lcd.setCursor(17, 3); // Set the Cursor
+     for(int knowledge = 0;  <= 100; knowledge++){ // logic to increment knowledge value
+          lcd.print(knowledge); // prints knowledge 0 to 99 
+}
+  delay (100);
+}
+//Jenny LeClerc
+screen1(){
+//display screen 1 stuff here
+  lcd.clear (); // Clear the Screen
+  lcd.setCursor(0, 0); // Set the Cursor
+  lcd.print("Jenny LeClerc"); // Write Name
+  lcd.setCursor(0, 1); // Set the Cursor
+  lcd.print("DOB: 1-Mar"); // Write DOB
+  lcd.setCursor(0, 2); // Set the Cursor
+  lcd.print("Spd:"); // Write Spd:
+     for(int speed = 0; speed <= 100; speed++){ // logic to increment speed value
+          lcd.print(speed); // prints speed 0 to 99
+}
+  lcd.setCursor(11, 2); // Set the Cursor
+  lcd.print("Mgt:"); // Write Mgt:
+  lcd.setCursor(17, 2); // Set the Cursor
+     for(int might= 0; might <= 100; might++){ // logic to increment might value
+          lcd.print(might); // prints might 0 to 99  
+}
+  lcd.setCursor(0, 3); // Set the Cursor
+  lcd.print("San:"); // Write San:
+  lcd.setCursor(6, 3); // Set the Cursor
+     for(int sanity= 0; sanity <= 100; sanity++){ // logic to increment sanity value
+          lcd.print(sanity); // prints sanity 0 to 99   
+}
+  lcd.setCursor(11, 3); // Set the Cursor
+  lcd.print("Kno:"); // Write Kno:
+  lcd.setCursor(17, 3); // Set the Cursor
+     for(int knowledge = 0;  <= 100; knowledge++){ // logic to increment knowledge value
+          lcd.print(knowledge); // prints knowledge 0 to 99 
+}
+  delay (100);
+}
+//Vivian Lopez
+screen2(){
+//display screen 2 stuff here
+  lcd.clear (); // Clear the Screen
+  lcd.setCursor(0, 0); // Set the Cursor
+  lcd.print("Vivian Lopez"); // Write Name
+  lcd.setCursor(0, 1); // Set the Cursor
+  lcd.print("DOB: 11-Jan"); // Write DOB
+  lcd.setCursor(0, 2); // Set the Cursor
+  lcd.print("Spd:"); // Write Spd:
+     for(int speed = 0; speed <= 100; speed++){ // logic to increment speed value
+          lcd.print(speed); // prints speed 0 to 99
+}
+  lcd.setCursor(11, 2); // Set the Cursor
+  lcd.print("Mgt:"); // Write Mgt:
+  lcd.setCursor(17, 2); // Set the Cursor
+     for(int might= 0; might <= 100; might++){ // logic to increment might value
+          lcd.print(might); // prints might 0 to 99  
+}
+  lcd.setCursor(0, 3); // Set the Cursor
+  lcd.print("San:"); // Write San:
+  lcd.setCursor(6, 3); // Set the Cursor
+     for(int sanity= 0; sanity <= 100; sanity++){ // logic to increment sanity value
+          lcd.print(sanity); // prints sanity 0 to 99   
+}
+  lcd.setCursor(11, 3); // Set the Cursor
+  lcd.print("Kno:"); // Write Kno:
+  lcd.setCursor(17, 3); // Set the Cursor
+     for(int knowledge = 0;  <= 100; knowledge++){ // logic to increment knowledge value
+          lcd.print(knowledge); // prints knowledge 0 to 99 
+}
+  delay (100);
+}
+//Madame Zostra
+screen3(){
+//display screen 3 stuff here
+  lcd.clear (); // Clear the Screen
+  lcd.setCursor(0, 0); // Set the Cursor
+  lcd.print("Madame Zostra"); // Write Name
+  lcd.setCursor(0, 1); // Set the Cursor
+  lcd.print("DOB: 10-Dec"); // Write DOB
+  lcd.setCursor(0, 2); // Set the Cursor
+  lcd.print("Spd:"); // Write Spd:
+     for(int speed = 0; speed <= 100; speed++){ // logic to increment speed value
+          lcd.print(speed); // prints speed 0 to 99
+}
+  lcd.setCursor(11, 2); // Set the Cursor
+  lcd.print("Mgt:"); // Write Mgt:
+  lcd.setCursor(17, 2); // Set the Cursor
+     for(int might= 0; might <= 100; might++){ // logic to increment might value
+          lcd.print(might); // prints might 0 to 99  
+}
+  lcd.setCursor(0, 3); // Set the Cursor
+  lcd.print("San:"); // Write San:
+  lcd.setCursor(6, 3); // Set the Cursor
+     for(int sanity= 0; sanity <= 100; sanity++){ // logic to increment sanity value
+          lcd.print(sanity); // prints sanity 0 to 99   
+}
+  lcd.setCursor(11, 3); // Set the Cursor
+  lcd.print("Kno:"); // Write Kno:
+  lcd.setCursor(17, 3); // Set the Cursor
+     for(int knowledge = 0;  <= 100; knowledge++){ // logic to increment knowledge value
+          lcd.print(knowledge); // prints knowledge 0 to 99 
+}
+  delay (100);
+}
+//Missy Dubourde
+screen4(){
+//display screen 4 stuff here
+  lcd.clear (); // Clear the Screen
+  lcd.setCursor(0, 0); // Set the Cursor
+  lcd.print("Missy Dubourde"); // Write Name
+  lcd.setCursor(0, 1); // Set the Cursor
+  lcd.print("DOB: 14-Feb"); // Write DOB
+  lcd.setCursor(0, 2); // Set the Cursor
+  lcd.print("Spd:"); // Write Spd:
+     for(int speed = 0; speed <= 100; speed++){ // logic to increment speed value
+          lcd.print(speed); // prints speed 0 to 99
+}
+  lcd.setCursor(11, 2); // Set the Cursor
+  lcd.print("Mgt:"); // Write Mgt:
+  lcd.setCursor(17, 2); // Set the Cursor
+     for(int might= 0; might <= 100; might++){ // logic to increment might value
+          lcd.print(might); // prints might 0 to 99  
+}
+  lcd.setCursor(0, 3); // Set the Cursor
+  lcd.print("San:"); // Write San:
+  lcd.setCursor(6, 3); // Set the Cursor
+     for(int sanity= 0; sanity <= 100; sanity++){ // logic to increment sanity value
+          lcd.print(sanity); // prints sanity 0 to 99   
+}
+  lcd.setCursor(11, 3); // Set the Cursor
+  lcd.print("Kno:"); // Write Kno:
+  lcd.setCursor(17, 3); // Set the Cursor
+     for(int knowledge = 0;  <= 100; knowledge++){ // logic to increment knowledge value
+          lcd.print(knowledge); // prints knowledge 0 to 99 
+}
+  delay (100);
+}
+//Zoe Ingstrom
+screen5(){
+//display screen 5 stuff here
+  lcd.clear (); // Clear the Screen
+  lcd.setCursor(0, 0); // Set the Cursor
+  lcd.print("Zoe Ingstrom"); // Write Name
+  lcd.setCursor(0, 1); // Set the Cursor
+  lcd.print("DOB: 5-Nov"); // Write DOB
+  lcd.setCursor(0, 2); // Set the Cursor
+  lcd.print("Spd:"); // Write Spd:
+     for(int speed = 0; speed <= 100; speed++){ // logic to increment speed value
+          lcd.print(speed); // prints speed 0 to 99
+}
+  lcd.setCursor(11, 2); // Set the Cursor
+  lcd.print("Mgt:"); // Write Mgt:
+  lcd.setCursor(17, 2); // Set the Cursor
+     for(int might= 0; might <= 100; might++){ // logic to increment might value
+          lcd.print(might); // prints might 0 to 99  
+}
+  lcd.setCursor(0, 3); // Set the Cursor
+  lcd.print("San:"); // Write San:
+  lcd.setCursor(6, 3); // Set the Cursor
+     for(int sanity= 0; sanity <= 100; sanity++){ // logic to increment sanity value
+          lcd.print(sanity); // prints sanity 0 to 99   
+}
+  lcd.setCursor(11, 3); // Set the Cursor
+  lcd.print("Kno:"); // Write Kno:
+  lcd.setCursor(17, 3); // Set the Cursor
+     for(int knowledge = 0;  <= 100; knowledge++){ // logic to increment knowledge value
+          lcd.print(knowledge); // prints knowledge 0 to 99 
+}
+  delay (100);
+}
+//Ox Bellows
+screen6(){
+//display screen 6 stuff here
+  lcd.clear (); // Clear the Screen
+  lcd.setCursor(0, 0); // Set the Cursor
+  lcd.print("Ox Bellows"); // Write Name
+  lcd.setCursor(0, 1); // Set the Cursor
+  lcd.print("DOB: 18-Oct"); // Write DOB
+  lcd.setCursor(0, 2); // Set the Cursor
+  lcd.print("Spd:"); // Write Spd:
+     for(int speed = 0; speed <= 100; speed++){ // logic to increment speed value
+          lcd.print(speed); // prints speed 0 to 99
+}
+  lcd.setCursor(11, 2); // Set the Cursor
+  lcd.print("Mgt:"); // Write Mgt:
+  lcd.setCursor(17, 2); // Set the Cursor
+     for(int might= 0; might <= 100; might++){ // logic to increment might value
+          lcd.print(might); // prints might 0 to 99  
+}
+  lcd.setCursor(0, 3); // Set the Cursor
+  lcd.print("San:"); // Write San:
+  lcd.setCursor(6, 3); // Set the Cursor
+     for(int sanity= 0; sanity <= 100; sanity++){ // logic to increment sanity value
+          lcd.print(sanity); // prints sanity 0 to 99   
+}
+  lcd.setCursor(11, 3); // Set the Cursor
+  lcd.print("Kno:"); // Write Kno:
+  lcd.setCursor(17, 3); // Set the Cursor
+     for(int knowledge = 0;  <= 100; knowledge++){ // logic to increment knowledge value
+          lcd.print(knowledge); // prints knowledge 0 to 99 
+}
+  delay (100);
+}
+//Flash Williams
+screen7(){
+//display screen 7 stuff here
+  lcd.clear (); // Clear the Screen
+  lcd.setCursor(0, 0); // Set the Cursor
+  lcd.print("Flash Williams"); // Write Name
+  lcd.setCursor(0, 1); // Set the Cursor
+  lcd.print("DOB: 6-Jun"); // Write DOB
+  lcd.setCursor(0, 2); // Set the Cursor
+  lcd.print("Spd:"); // Write Spd:
+     for(int speed = 0; speed <= 100; speed++){ // logic to increment speed value
+          lcd.print(speed); // prints speed 0 to 99
+}
+  lcd.setCursor(11, 2); // Set the Cursor
+  lcd.print("Mgt:"); // Write Mgt:
+  lcd.setCursor(17, 2); // Set the Cursor
+     for(int might= 0; might <= 100; might++){ // logic to increment might value
+          lcd.print(might); // prints might 0 to 99  
+}
+  lcd.setCursor(0, 3); // Set the Cursor
+  lcd.print("San:"); // Write San:
+  lcd.setCursor(6, 3); // Set the Cursor
+     for(int sanity= 0; sanity <= 100; sanity++){ // logic to increment sanity value
+          lcd.print(sanity); // prints sanity 0 to 99   
+}
+  lcd.setCursor(11, 3); // Set the Cursor
+  lcd.print("Kno:"); // Write Kno:
+  lcd.setCursor(17, 3); // Set the Cursor
+     for(int knowledge = 0;  <= 100; knowledge++){ // logic to increment knowledge value
+          lcd.print(knowledge); // prints knowledge 0 to 99 
+}
+  delay (100);
+}
+//Peter Akimoto
+screen8(){
+//display screen 8 stuff here
+  lcd.clear (); // Clear the Screen
+  lcd.setCursor(0, 0); // Set the Cursor
+  lcd.print("Peter Akimoto"); // Write Name
+  lcd.setCursor(0, 1); // Set the Cursor
+  lcd.print("DOB: 3-Sep"); // Write DOB
+  lcd.setCursor(0, 2); // Set the Cursor
+  lcd.print("Spd:"); // Write Spd:
+     for(int speed = 0; speed <= 100; speed++){ // logic to increment speed value
+          lcd.print(speed); // prints speed 0 to 99
+}
+  lcd.setCursor(11, 2); // Set the Cursor
+  lcd.print("Mgt:"); // Write Mgt:
+  lcd.setCursor(17, 2); // Set the Cursor
+     for(int might= 0; might <= 100; might++){ // logic to increment might value
+          lcd.print(might); // prints might 0 to 99  
+}
+  lcd.setCursor(0, 3); // Set the Cursor
+  lcd.print("San:"); // Write San:
+  lcd.setCursor(6, 3); // Set the Cursor
+     for(int sanity= 0; sanity <= 100; sanity++){ // logic to increment sanity value
+          lcd.print(sanity); // prints sanity 0 to 99   
+}
+  lcd.setCursor(11, 3); // Set the Cursor
+  lcd.print("Kno:"); // Write Kno:
+  lcd.setCursor(17, 3); // Set the Cursor
+     for(int knowledge = 0;  <= 100; knowledge++){ // logic to increment knowledge value
+          lcd.print(knowledge); // prints knowledge 0 to 99 
+}
+  delay (100);
+}
+//Brandon Jaspers
+screen9(){
+//display screen 9 stuff here
+  lcd.clear (); // Clear the Screen
+  lcd.setCursor(0, 0); // Set the Cursor
+  lcd.print("Brandon Jaspers"); // Write Name
+  lcd.setCursor(0, 1); // Set the Cursor
+  lcd.print("DOB: 21-May"); // Write DOB
+  lcd.setCursor(0, 2); // Set the Cursor
+  lcd.print("Spd:"); // Write Spd:
+     for(int speed = 0; speed <= 100; speed++){ // logic to increment speed value
+          lcd.print(speed); // prints speed 0 to 99
+}
+  lcd.setCursor(11, 2); // Set the Cursor
+  lcd.print("Mgt:"); // Write Mgt:
+  lcd.setCursor(17, 2); // Set the Cursor
+     for(int might= 0; might <= 100; might++){ // logic to increment might value
+          lcd.print(might); // prints might 0 to 99  
+}
+  lcd.setCursor(0, 3); // Set the Cursor
+  lcd.print("San:"); // Write San:
+  lcd.setCursor(6, 3); // Set the Cursor
+     for(int sanity= 0; sanity <= 100; sanity++){ // logic to increment sanity value
+          lcd.print(sanity); // prints sanity 0 to 99   
+}
+  lcd.setCursor(11, 3); // Set the Cursor
+  lcd.print("Kno:"); // Write Kno:
+  lcd.setCursor(17, 3); // Set the Cursor
+     for(int knowledge = 0;  <= 100; knowledge++){ // logic to increment knowledge value
+          lcd.print(knowledge); // prints knowledge 0 to 99 
+}
+  delay (100);
+}
+//Professor Longfellow
+screen10(){
+//display screen 10 stuff here
+  lcd.clear (); // Clear the Screen
+  lcd.setCursor(0, 0); // Set the Cursor
+  lcd.print("Professor Longfellow"); // Write Name
+  lcd.setCursor(0, 1); // Set the Cursor
+  lcd.print("DOB: 27-Jul"); // Write DOB
+  lcd.setCursor(0, 2); // Set the Cursor
+  lcd.print("Spd:"); // Write Spd:
+     for(int speed = 0; speed <= 100; speed++){ // logic to increment speed value
+          lcd.print(speed); // prints speed 0 to 99
+}
+  lcd.setCursor(11, 2); // Set the Cursor
+  lcd.print("Mgt:"); // Write Mgt:
+  lcd.setCursor(17, 2); // Set the Cursor
+     for(int might= 0; might <= 100; might++){ // logic to increment might value
+          lcd.print(might); // prints might 0 to 99  
+}
+  lcd.setCursor(0, 3); // Set the Cursor
+  lcd.print("San:"); // Write San:
+  lcd.setCursor(6, 3); // Set the Cursor
+     for(int sanity= 0; sanity <= 100; sanity++){ // logic to increment sanity value
+          lcd.print(sanity); // prints sanity 0 to 99   
+}
+  lcd.setCursor(11, 3); // Set the Cursor
+  lcd.print("Kno:"); // Write Kno:
+  lcd.setCursor(17, 3); // Set the Cursor
+     for(int knowledge = 0;  <= 100; knowledge++){ // logic to increment knowledge value
+          lcd.print(knowledge); // prints knowledge 0 to 99 
+}
+  delay (100);
+}
+//Father Rhinehardt
+screen11(){
+//display screen 11 stuff here
+  lcd.clear (); // Clear the Screen
+  lcd.setCursor(0, 0); // Set the Cursor
+  lcd.print("Father Rhinehardt"); // Write Name
+  lcd.setCursor(0, 1); // Set the Cursor
+  lcd.print("DOB: 29-Apr"); // Write DOB
+  lcd.setCursor(0, 2); // Set the Cursor
+  lcd.print("Spd:"); // Write Spd:
+     for(int speed = 0; speed <= 100; speed++){ // logic to increment speed value
+          lcd.print(speed); // prints speed 0 to 99
+}
+  lcd.setCursor(11, 2); // Set the Cursor
+  lcd.print("Mgt:"); // Write Mgt:
+  lcd.setCursor(17, 2); // Set the Cursor
+     for(int might= 0; might <= 100; might++){ // logic to increment might value
+          lcd.print(might); // prints might 0 to 99  
+}
+  lcd.setCursor(0, 3); // Set the Cursor
+  lcd.print("San:"); // Write San:
+  lcd.setCursor(6, 3); // Set the Cursor
+     for(int sanity= 0; sanity <= 100; sanity++){ // logic to increment sanity value
+          lcd.print(sanity); // prints sanity 0 to 99   
+}
+  lcd.setCursor(11, 3); // Set the Cursor
+  lcd.print("Kno:"); // Write Kno:
+  lcd.setCursor(17, 3); // Set the Cursor
+     for(int knowledge = 0;  <= 100; knowledge++){ // logic to increment knowledge value
+          lcd.print(knowledge); // prints knowledge 0 to 99 
+}
+  delay (100);
+}
